@@ -3,6 +3,8 @@ from typing import TypedDict
 from httpx import Response, QueryParams
 
 from clients.http.client import HTTPClient
+from clients.http.gateway.client import build_gateway_http_client
+
 
 class GetOperationsQueryDict(TypedDict):
     """
@@ -166,3 +168,11 @@ class OperationsGatewayHTTPClient(HTTPClient):
         :return: Ответ от сервера (объект httpx.Response).
         """
         return self.post('/api/v1/operations/make-cash-withdrawal-operation', json=request)
+
+def build_operations_gateway_http_client() -> OperationsGatewayHTTPClient:
+    """
+    Функция создаёт экземпляр OperationsGatewayHTTPClient с уже настроенным HTTP-клиентом.
+
+    :return: Готовый к использованию OperationsGatewayHTTPClient.
+    """
+    return OperationsGatewayHTTPClient(client=build_gateway_http_client())
