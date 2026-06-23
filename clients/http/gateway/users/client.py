@@ -15,6 +15,9 @@ class CreateUserRequestDict(TypedDict):
     phoneNumber: str
 
 class UserDict(TypedDict):
+    """
+    Описание структуры пользователя.
+    """
     id: str
     email: str
     lastName: str
@@ -23,9 +26,15 @@ class UserDict(TypedDict):
     phoneNumber: str
 
 class GetUserResponseDict(TypedDict):
+    """
+    Описание структуры ответа по получению пользователя.
+    """
     user: UserDict
 
 class CreateUserResponseDict(TypedDict):
+    """
+    Описание структуры ответа по созданию пользователя.
+    """
     user: UserDict
 
 class UsersGatewayHTTPClient(HTTPClient):
