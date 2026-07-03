@@ -101,6 +101,11 @@ class AccountsGatewayGRPCClient(GRPCClient):
         request = OpenCreditCardAccountRequest(user_id=user_id)
         return self.open_credit_card_api(request)
 
+    def open_debit_account(self, user_id: str) -> OpenDebitCardAccountResponse:
+        request = OpenDebitCardAccountRequest(user_id=user_id)
+        return self.open_debit_card_account_api(request)
+
+
 def build_accounts_gateway_grpc_client() -> AccountsGatewayGRPCClient:
     """
     Фабрика для создания экземпляра AccountsGatewayGRPCClient.
