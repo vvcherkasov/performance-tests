@@ -85,26 +85,21 @@ class AccountsGatewayGRPCClient(GRPCClient):
         request = GetAccountsRequest(user_id=user_id)
         return self.get_accounts_api(request)
 
-    def deposit_account(self, user_id: str) -> OpenDepositAccountResponse:
+    def open_deposit_account(self, user_id: str) -> OpenDepositAccountResponse:
         request = OpenDepositAccountRequest(user_id=user_id)
         return self.open_deposit_account_api(request)
 
-    def open_savings(self, user_id: str) -> OpenSavingsAccountResponse:
+    def open_savings_account(self, user_id: str) -> OpenSavingsAccountResponse:
         request = OpenSavingsAccountRequest(user_id=user_id)
         return self.open_savings_account_api(request)
-
-    def debit_card_account(self, user_id: str) -> OpenDebitCardAccountResponse:
-        request = OpenDebitCardAccountRequest(user_id=user_id)
-        return self.open_debit_card_account_api(request)
-
-    def credit_card_account(self, user_id: str) -> OpenCreditCardAccountResponse:
-        request = OpenCreditCardAccountRequest(user_id=user_id)
-        return self.open_credit_card_api(request)
 
     def open_debit_account(self, user_id: str) -> OpenDebitCardAccountResponse:
         request = OpenDebitCardAccountRequest(user_id=user_id)
         return self.open_debit_card_account_api(request)
 
+    def open_credit_account(self, user_id: str) -> OpenCreditCardAccountResponse:
+        request = OpenCreditCardAccountRequest(user_id=user_id)
+        return self.open_credit_card_api(request)
 
 def build_accounts_gateway_grpc_client() -> AccountsGatewayGRPCClient:
     """
