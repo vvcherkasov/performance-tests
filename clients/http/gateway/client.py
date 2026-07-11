@@ -3,7 +3,7 @@ import logging
 from httpx import Client
 from locust.env import Environment
 from clients.http.event_hooks.locust_event_hook import locust_request_event_hook, locust_response_event_hook
-from logging
+import logging
 
 def build_gateway_http_client() -> Client:
     """
