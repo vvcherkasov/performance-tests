@@ -43,7 +43,7 @@ def locust_response_event_hook(environment: Environment):
             context=None,
             response=response,
             exception=exception,
-            reuest_type="HTTP",
+            request_type="HTTP",
             response_time=response_time,
             response_length=response_length
         )
