@@ -1,23 +1,22 @@
-from dns.entropy import between
-from locust import User, task
+from locust import User, task, between
 
-from clients.grpc.gateway.locust import GatewayGrpcSequentialTaskSet
-from contracts.services.gateway.users.rpc_create_user_pb2 import CreateUserResponse
-from contracts.services.gateway.accounts.rpc_open_savings_account_pb2 import OpenSavingsAccountResponse
+from clients.http.gateway.accounts.schema import OpenSavingAccountsResponseSchema
+from clients.http.gateway.locust import GatewayHTTPSequentialTaskSet, GatewayHTTPTaskSet
+from clients.http.gateway.users.schema import CreateUserResponseSchema
 
 
-class GetDocumentsSequentialTaskSet(GatewayGrpcSequentialTaskSet):
+class GetDocumentsSequentialTaskSet(GatewayHTTPSequentialTaskSet):
     """
     Нагрузочный сценарий, который последовательно:
     1. Создаёт нового пользователя.
     2. Открывает сберегательный счёт.
     3. Получает документы по счёту (тариф и контракт).
 
-    Использует базовый GatewayGRPCSequentialTaskSet и уже созданных в нём API клиентов.
+    Использует базовый GatewayHTTPSequentialTaskSet и уже созданных в нём API клиентов.
     """
     # Shared state — сохраняем результаты запросов для дальнейшего использования
-    create_user_response: CreateUserResponse | None = None
-    open_savings_account_response: OpenSavingsAccountResponse | None = None
+    create_user_response: CreateUserResponseSchema | None = None
+    open_savings_account_response: OpenSavingAccountsResponseSchema | None = None
 
     @task
     def create_user(self):
@@ -54,7 +53,6 @@ class GetDocumentsSequentialTaskSet(GatewayGrpcSequentialTaskSet):
         self.documents_gateway_client.get_contract_document(
             account_id=self.open_savings_account_response.account.id
         )
-
 
 class GetDocumentsUser(User):
     """
