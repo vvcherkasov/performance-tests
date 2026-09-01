@@ -33,10 +33,10 @@ class SeedAccountResult(BaseModel):
         cash_withdrawal_operations (list[SeedOperationResult]): Список операций по снятию наличных.
     """
     account_id: str
-    physical_cards: list[SeedCardResult] = Field(default_factory=SeedCardResult)
+    physical_cards: list[SeedCardResult] = Field(default_factory=list)
     virtual_cards: list[SeedCardResult] = Field(default_factory=list)
-    top_up_operations: list[SeedOperationResult] = Field(default_factory=SeedOperationResult)
-    purchase_operations: list[SeedOperationResult] = Field(default_factory=SeedOperationResult)
+    top_up_operations: list[SeedOperationResult] = Field(default_factory=list)
+    purchase_operations: list[SeedOperationResult] = Field(default_factory=list)
     transfer_operations: list[SeedOperationResult] = Field(default_factory=list)
     cash_withdrawal_operations: list[SeedOperationResult] = Field(default_factory=list)
 
@@ -52,10 +52,10 @@ class SeedUserResult(BaseModel):
         credit_card_accounts (list[SeedAccountResult]): Список кредитных счетов.
     """
     user_id: str
-    deposit_accounts: list[SeedAccountResult] = Field(default_factory=SeedAccountResult)
-    savings_accounts: list[SeedAccountResult] = Field(default_factory=SeedAccountResult)
-    debit_card_accounts: list[SeedAccountResult] = Field(default_factory=SeedAccountResult)
-    credit_card_accounts: list[SeedAccountResult] = Field(default_factory=SeedAccountResult)
+    deposit_accounts: list[SeedAccountResult] = Field(default_factory=list)
+    savings_accounts: list[SeedAccountResult] = Field(default_factory=list)
+    debit_card_accounts: list[SeedAccountResult] = Field(default_factory=list)
+    credit_card_accounts: list[SeedAccountResult] = Field(default_factory=list)
 
 class SeedsResult(BaseModel):
     """

@@ -208,11 +208,11 @@ class SeedsBuilder:
             ],
             transfer_operations=[
                 self.build_transfer_operation_result(card_id=card_id, account_id=account_id)
-                for _ in range(plan.purchase_operations.count)
+                for _ in range(plan.transfer_operations.count)
             ],
             cash_withdrawal_operations=[
                 self.build_cash_withdrawal_operation_result(card_id=card_id, account_id=account_id)
-                for _ in range(plan.purchase_operations.count)
+                for _ in range(plan.cash_withdrawal_operations.count)
             ]
         )
 
@@ -251,6 +251,14 @@ class SeedsBuilder:
             purchase_operations=[
                 self.build_purchase_operations_result(card_id=card_id, account_id=account_id)
                 for _ in range(plan.purchase_operations.count)
+            ],
+            transfer_operations=[
+                self.build_transfer_operation_result(card_id=card_id, account_id=account_id)
+                for _ in range(plan.transfer_operations.count)
+            ],
+            cash_withdrawal_operations=[
+                self.build_cash_withdrawal_operation_result(card_id=card_id, account_id=account_id)
+                for _ in range(plan.cash_withdrawal_operations.count)
             ]
         )
 
