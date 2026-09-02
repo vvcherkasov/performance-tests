@@ -32,8 +32,7 @@ class GetDocumentsSequentialTaskSet(GatewayHTTPSequentialTaskSet):
         Открываем сберегательный счёт для созданного пользователя.
         Проверяем, что предыдущий шаг был успешным.
         """
-        if not self.create_user_response:
-            return
+
 
         self.open_savings_account_response = self.accounts_gateway_client.open_savings_account(
             user_id=self.create_user_response.user.id
