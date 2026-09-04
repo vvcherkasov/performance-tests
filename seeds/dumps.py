@@ -22,5 +22,5 @@ def load_seeds_result(scenario: str) -> SeedsResult:
     :param scenario: Название сценария нагрузки, данные которого нужно загрузить.
     :return: Объект SeedsResult, восстановленный из файла.
     """
-    with open(f"./dumps/{scenario}.json", "r", encoding="utf-8") as file:
+    with open(f"./dumps/{scenario}_seeds.json", "r", encoding="utf-8") as file:
         return SeedsResult.model_validate_json(file.read())
