@@ -1,7 +1,7 @@
 from seeds.scenario import SeedsScenario
 from seeds.schema.plan import SeedsPlan, SeedUsersPlan, SeedAccountsPlan
 
-class ExistingUserGetDocuments(SeedsScenario):
+class ExistingUserGetDocumentsSeedsScenario(SeedsScenario):
     """
     Сценарий сидинга для существующего пользователя, который просматривает свои счета и документы.
     Создаём 100 пользователей, каждому из которых открываются дебетовый и сберегательный счёт.
@@ -34,5 +34,5 @@ if "__main__" == __name__:
     Запуск сценария сидинга вручную.
     Создаём объект сценария и вызываем метод build для создания данных.
     """
-    seeds_scenario = ExistingUserGetDocuments()
+    seeds_scenario = ExistingUserGetDocumentsSeedsScenario()
     seeds_scenario.build()
