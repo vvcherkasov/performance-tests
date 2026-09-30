@@ -4,7 +4,9 @@ from seeds.builder import build_grpc_seeds_builder, SeedsBuilder
 from seeds.dumps import save_seeds_result, load_seeds_result
 from seeds.schema.plan import SeedsPlan
 from seeds.schema.result import SeedsResult
+from tools.logger import get_logger
 
+logger = get_logger("SEEDS_SCENARIO")
 
 class SeedsScenario(ABC):
     """
@@ -42,18 +44,26 @@ class SeedsScenario(ABC):
         Сохраняет результат сидинга в файл.
         :param result: Объект SeedsResult, содержащий сгенерированные данные.
         """
+        logger.info(f"[{self.scenario}] saving seeding result to file")
         save_seeds_result(result=result, scenario=self.scenario)
+        logger.info(f"[{self.scenario}] seeding result saving successfully.")
 
     def load(self) -> SeedsResult:
         """
         Загружает результаты сидинга из файла.
         :return: Объект SeedsResult, содержащий данные, загруженные из файла.
         """
-        return load_seeds_result(scenario=self.scenario)
+        logger.info(f"[{self.scenario}] loading seeding from file")
+        result = load_seeds_result(scenario=self.scenario)
+        logger.info(f"[{self.scenario}] seeding result loading successfully.")
+        return result
 
     def build(self) -> None:
         """
         Генерирует данные с помощью билдера, используя план сидинга, и сохраняет результат.
         """
+        plan_json = self.plan.model_dump_json(indent=2, exclude_defaults=True)
+        logger.info(f"[{self.scenario}] starting seeding data generation from plan: {plan_json}")
         result = self.builder.build(plan=self.plan)
+        logger.info(f"[{self.scenario}] seeding data generation completed successfully.")
         self.save(result)
